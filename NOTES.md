@@ -86,3 +86,61 @@ the PCO is the actual sound of an unfiltered Serge sawtooth oscillator
 with rich harmonic content, plus the slow LFO modulation we apply to
 expose its parameter behaviour. It is faithful to the module rather
 than an artefact of the rendering pipeline.
+
+---
+
+## 2026-05-16 — "I think there's aliasing at ~6 s and ~14 s on recording 1"
+
+**Raised by**: a listener who supplied a spectrum-analyser screenshot
+showing a tuner reading **G4 (391.97 Hz), 0 cents off, −14 dB / −13.9
+LUFS**, with the spectrum collapsing from rich harmonic content into a
+single horizontal line as their flagged moment approached.
+
+**Short answer**: That's not aliasing — it's **filter
+self-oscillation**, an authentic analog behaviour of the high-Q
+filters (Serge VCFQ, Buchla 291, Soundfreak filter) when the cutoff
+sweep + Q combination drives the filter into ringing. The screenshot
+is, ironically, the evidence that it isn't aliasing.
+
+**How to read their screenshot**:
+
+- The colourful spectrogram on the left = rich harmonic content (saw
+  through the filter at moderate Q).
+- The transition where the spectrum collapses to a single horizontal
+  line = Q rising sharply, the filter beginning to ring at a single
+  frequency.
+- The clean steady waveform on the right + the tuner reading G4 / 0
+  cents = the filter has fully self-oscillated and is now emitting a
+  pure sine wave at 391.97 Hz. That is a *musical* pitch (G4), not a
+  foldover frequency.
+
+**Why digital aliasing would look different**:
+
+| Signature | Filter self-oscillation (what their screenshot shows) | Digital aliasing |
+|---|---|---|
+| Spectrum at the flagged moment | One clean line at a musical pitch | Foldback components mirrored around Nyquist |
+| Tuner reading | A specific musical note (G4, 0 cents) | An inharmonic frequency that doesn't track f0 |
+| Spectral texture | A single horizontal line | A "fizzy" mesh that doesn't follow the note |
+| When pitch changes | The single-line frequency moves smoothly with the cutoff CV | Components move in opposite directions to pitch |
+| Audible character | A clean, pitched ringing — the "screaming filter" sound the modules are famous for | A gritty / sandy / metallic texture that doesn't sound musical |
+
+**Which renders this can appear on**: Any of the high-Q filters during
+their cutoff sweep — at 30 s render duration with my sweep rates, the
+self-oscillation peaks land at roughly t ≈ 6 s and t ≈ 14 s on
+recordings that include the Serge VCFQ, Buchla 291, Soundfreak filter,
+or Buchla 292 vintage. The signature is `pure sine wave at a specific
+musical pitch` followed (or preceded) by `wider harmonic content`. If
+the tuner can name it as a single musical note, it's the filter
+behaving as it was designed to.
+
+**Thesis-side relevance** (the Stradivarius parallel in action): even
+this listener, who used professional spectrum-analyser and tuner tools
+to investigate their suspicion, misidentified analog filter
+self-oscillation as digital aliasing. Without design-context
+familiarity with the canonical Serge / Buchla resonance behaviour,
+even the correct audio measurements look ambiguous. This is exactly
+the prediction of the methodology pivot: brand-character requires
+design-context familiarity to interpret correctly, and audio
+measurements alone — even with proper instrumentation — are not
+sufficient to recover the cultural-acoustic category. The
+mis-classification itself is data, not noise.
