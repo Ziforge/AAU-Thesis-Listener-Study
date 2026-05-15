@@ -44,14 +44,14 @@
     },
     {
       "id": "6e7fe618",
-      "label": "Buchla 292 LPG (variant A)",
+      "label": "Buchla 292 LPG (blue knob)",
       "file": "buchla_292_lpg.mp3",
       "system": "buchla_200",
       "module_id": "292"
     },
     {
       "id": "41f153a5",
-      "label": "Buchla 292 LPG (variant B)",
+      "label": "Buchla 292 LPG (black knob)",
       "file": "buchla_292_vintage.mp3",
       "system": "buchla_200",
       "module_id": "292"
@@ -193,7 +193,7 @@
     {
       "stimulus_id": "6e7fe618",
       "file": "buchla_292_lpg.mp3",
-      "label": "Buchla 292 LPG (variant A)",
+      "label": "Buchla 292 LPG (blue knob)",
       "true_system": "buchla_200",
       "true_module": "292",
       "category": "main"
@@ -201,7 +201,7 @@
     {
       "stimulus_id": "41f153a5",
       "file": "buchla_292_vintage.mp3",
-      "label": "Buchla 292 LPG (variant B)",
+      "label": "Buchla 292 LPG (black knob)",
       "true_system": "buchla_200",
       "true_module": "292",
       "category": "main"
