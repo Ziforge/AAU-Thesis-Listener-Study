@@ -7,7 +7,7 @@
 // signals: system_correct vs module_correct.
 
 // === CONFIG ============================================================
-const APPS_SCRIPT_URL = "REPLACE_WITH_YOUR_GOOGLE_APPS_SCRIPT_URL";
+const APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbw07f_GozLn2FrAMa_Wl8PlFmnKcmoD5pGmpuZ4-XvYZ7VYg8hCLVv9hP0fYKJZHKf0yw/exec";
 const STUDY_VERSION = "v3.1_two_stage_buttons_2026-05-15";
 const ADVANCE_DELAY_MS = 700;
 // =======================================================================
