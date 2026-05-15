@@ -43,18 +43,18 @@
       "module_id": "291"
     },
     {
-      "id": "6965ad59",
-      "label": "Buchla 292c LPG",
+      "id": "6e7fe618",
+      "label": "Buchla 292 LPG (variant A)",
       "file": "buchla_292_lpg.mp3",
       "system": "buchla_200",
-      "module_id": "292c"
+      "module_id": "292"
     },
     {
-      "id": "f434c2c2",
-      "label": "Buchla 292 vintage",
+      "id": "41f153a5",
+      "label": "Buchla 292 LPG (variant B)",
       "file": "buchla_292_vintage.mp3",
       "system": "buchla_200",
-      "module_id": "292v"
+      "module_id": "292"
     },
     {
       "id": "dab83226",
@@ -191,19 +191,19 @@
       "category": "main"
     },
     {
-      "stimulus_id": "6965ad59",
+      "stimulus_id": "6e7fe618",
       "file": "buchla_292_lpg.mp3",
-      "label": "Buchla 292c LPG",
+      "label": "Buchla 292 LPG (variant A)",
       "true_system": "buchla_200",
-      "true_module": "292c",
+      "true_module": "292",
       "category": "main"
     },
     {
-      "stimulus_id": "f434c2c2",
+      "stimulus_id": "41f153a5",
       "file": "buchla_292_vintage.mp3",
-      "label": "Buchla 292 vintage",
+      "label": "Buchla 292 LPG (variant B)",
       "true_system": "buchla_200",
-      "true_module": "292v",
+      "true_module": "292",
       "category": "main"
     },
     {
@@ -352,12 +352,8 @@
         "291 Filter"
       ],
       [
-        "292c",
-        "292c LPG (modern reissue)"
-      ],
-      [
-        "292v",
-        "292 LPG (vintage)"
+        "292",
+        "292 Low Pass Gate"
       ],
       [
         "296",
@@ -371,7 +367,7 @@
     "serge": [
       [
         "dusg",
-        "DUSG"
+        "DUSG (Dual Universal Slope Generator)"
       ],
       [
         "fs",
@@ -379,15 +375,15 @@
       ],
       [
         "nto",
-        "NTO oscillator"
+        "NTO (New Timbral Oscillator)"
       ],
       [
         "pco",
-        "PCO oscillator"
+        "PCO (Precision Control Oscillator)"
       ],
       [
         "vcfq",
-        "VCFQ filter"
+        "VCFQ Filter"
       ],
       [
         "wm",
