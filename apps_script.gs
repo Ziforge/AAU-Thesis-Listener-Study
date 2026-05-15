@@ -40,31 +40,51 @@ function doGet(e) {
     .setMimeType(ContentService.MimeType.TEXT);
 }
 
+const PARTICIPANT_HEADERS = ["participant_id", "submitted_at", "started_at",
+  "age_band", "experience", "years_music", "familiarity", "prior_attempt",
+  "listening_device", "country", "consent", "study_version", "comment",
+  "n_responses"];
+
+const RESPONSE_HEADERS = ["participant_id", "trial_idx", "category",
+  "stimulus_id", "stimulus_label", "true_system", "true_module",
+  "listener_system", "listener_module", "system_correct", "module_correct",
+  "response_time_ms", "rated_at"];
+
+function ensureHeaderRow(sheet, expected) {
+  const lastCol = sheet.getLastColumn();
+  if (lastCol < expected.length) {
+    sheet.clear();
+    sheet.appendRow(expected);
+    return;
+  }
+  const first = sheet.getRange(1, 1, 1, expected.length).getValues()[0];
+  for (let i = 0; i < expected.length; ++i) {
+    if (first[i] !== expected[i]) {
+      // Schema drift detected — clear sheet and rewrite header.
+      sheet.clear();
+      sheet.appendRow(expected);
+      return;
+    }
+  }
+}
+
 function getOrCreateSheet() {
-  // Look for an existing sheet by title in the user's Drive
   const files = DriveApp.getFilesByName(SHEET_TITLE);
   let ss;
   if (files.hasNext()) {
     ss = SpreadsheetApp.open(files.next());
+    // Ensure both tabs exist; create missing
+    if (!ss.getSheetByName(SHEET_NAME_PARTICIPANTS)) ss.insertSheet(SHEET_NAME_PARTICIPANTS);
+    if (!ss.getSheetByName(SHEET_NAME_RESPONSES))   ss.insertSheet(SHEET_NAME_RESPONSES);
   } else {
     ss = SpreadsheetApp.create(SHEET_TITLE);
-    // Ensure both tabs exist
     ss.getSheets()[0].setName(SHEET_NAME_PARTICIPANTS);
     ss.insertSheet(SHEET_NAME_RESPONSES);
-    // Headers
-    ss.getSheetByName(SHEET_NAME_PARTICIPANTS)
-      .appendRow(["participant_id", "submitted_at", "started_at",
-                  "age_band", "experience", "years_music",
-                  "familiarity", "prior_attempt", "listening_device", "country",
-                  "consent", "study_version", "comment", "n_responses"]);
-    ss.getSheetByName(SHEET_NAME_RESPONSES)
-      .appendRow(["participant_id", "trial_idx", "category",
-                  "stimulus_id", "stimulus_label",
-                  "true_system", "true_module",
-                  "listener_system", "listener_module",
-                  "system_correct", "module_correct",
-                  "response_time_ms", "rated_at"]);
   }
+  // Always validate + repair headers on every fetch — self-healing across
+  // schema changes between deployments.
+  ensureHeaderRow(ss.getSheetByName(SHEET_NAME_PARTICIPANTS), PARTICIPANT_HEADERS);
+  ensureHeaderRow(ss.getSheetByName(SHEET_NAME_RESPONSES),    RESPONSE_HEADERS);
   return ss;
 }
 
