@@ -26,6 +26,7 @@ function doPost(e) {
     const ss = getOrCreateSheet();
     appendParticipant(ss, payload);
     appendResponses(ss, payload);
+    refreshNResponses(ss, payload.participant_id);
     return ContentService.createTextOutput(JSON.stringify({ok: true}))
       .setMimeType(ContentService.MimeType.JSON);
   } catch (err) {
@@ -88,11 +89,30 @@ function getOrCreateSheet() {
   return ss;
 }
 
+// Upsert participant row. Client provides participant_id (UUID generated at
+// session start), so incremental POSTs all share the same id. We update the
+// existing row (n_responses, submitted_at, comment) or insert a new row.
+// Falls back to server-side UUID if client didn't provide one (old clients).
 function appendParticipant(ss, p) {
   const sheet = ss.getSheetByName(SHEET_NAME_PARTICIPANTS);
-  const pid = Utilities.getUuid();
-  p.participant_id = pid;
-  sheet.appendRow([
+  let pid = (p.participant && p.participant.participant_id) || "";
+  if (!pid) {
+    pid = Utilities.getUuid();
+    if (p.participant) p.participant.participant_id = pid;
+  }
+  p.participant_id = pid;   // store on payload for appendResponses
+
+  // Search column A for existing pid
+  const lastRow = sheet.getLastRow();
+  let existingRow = -1;
+  if (lastRow > 1) {
+    const ids = sheet.getRange(2, 1, lastRow - 1, 1).getValues();
+    for (let i = 0; i < ids.length; i++) {
+      if (ids[i][0] === pid) { existingRow = i + 2; break; }
+    }
+  }
+
+  const rowValues = [
     pid,
     p.submitted_at || "",
     p.participant.started_at || "",
@@ -106,21 +126,74 @@ function appendParticipant(ss, p) {
     p.participant.consent ? "yes" : "no",
     p.participant.study_version || "",
     p.comment || "",
-    (p.responses || []).length,
-  ]);
+    0,   // n_responses placeholder; updated below after appendResponses
+  ];
+
+  if (existingRow > 0) {
+    // Preserve existing n_responses, will be recomputed after appendResponses
+    const existing = sheet.getRange(existingRow, 1, 1, PARTICIPANT_HEADERS.length).getValues()[0];
+    rowValues[12] = p.comment || existing[12] || "";    // keep last non-empty comment
+    sheet.getRange(existingRow, 1, 1, PARTICIPANT_HEADERS.length).setValues([rowValues]);
+  } else {
+    sheet.appendRow(rowValues);
+  }
 }
 
+// Recompute n_responses for this participant by counting rows in responses tab
+function refreshNResponses(ss, pid) {
+  const partSheet = ss.getSheetByName(SHEET_NAME_PARTICIPANTS);
+  const respSheet = ss.getSheetByName(SHEET_NAME_RESPONSES);
+  const lastResp = respSheet.getLastRow();
+  let count = 0;
+  if (lastResp > 1) {
+    const ids = respSheet.getRange(2, 1, lastResp - 1, 1).getValues();
+    for (let i = 0; i < ids.length; i++) if (ids[i][0] === pid) count++;
+  }
+  const lastPart = partSheet.getLastRow();
+  if (lastPart > 1) {
+    const partIds = partSheet.getRange(2, 1, lastPart - 1, 1).getValues();
+    for (let i = 0; i < partIds.length; i++) {
+      if (partIds[i][0] === pid) {
+        partSheet.getRange(i + 2, PARTICIPANT_HEADERS.length).setValue(count);
+        return;
+      }
+    }
+  }
+}
+
+// Append response rows. Dedupes within the sheet: if a (pid, trial_idx) row
+// already exists (e.g., listener went back / retry), overwrite it. Otherwise
+// append. This makes the per-trial incremental POSTs idempotent.
 function appendResponses(ss, p) {
   const sheet = ss.getSheetByName(SHEET_NAME_RESPONSES);
   const pid = p.participant_id;
-  const rows = (p.responses || []).map(r => [
-    pid, r.trial_idx, r.category || "main",
-    r.stimulus_id || "", r.stimulus_label || "",
-    r.true_system || "", r.true_module || "",
-    r.listener_system || "", r.listener_module || "",
-    r.system_correct === undefined ? "" : r.system_correct,
-    r.module_correct === undefined || r.module_correct === null ? "" : r.module_correct,
-    r.response_time_ms || "", r.rated_at || "",
-  ]);
-  if (rows.length > 0) sheet.getRange(sheet.getLastRow()+1, 1, rows.length, rows[0].length).setValues(rows);
+  const lastRow = sheet.getLastRow();
+  // Build (pid, trial_idx) → rowIdx index for fast dedupe lookup
+  const existingIdx = {};
+  if (lastRow > 1) {
+    const data = sheet.getRange(2, 1, lastRow - 1, 2).getValues();
+    for (let i = 0; i < data.length; i++) {
+      if (data[i][0] === pid) existingIdx[data[i][1]] = i + 2;
+    }
+  }
+  const toAppend = [];
+  (p.responses || []).forEach(r => {
+    const row = [
+      pid, r.trial_idx, r.category || "main",
+      r.stimulus_id || "", r.stimulus_label || "",
+      r.true_system || "", r.true_module || "",
+      r.listener_system || "", r.listener_module || "",
+      r.system_correct === undefined ? "" : r.system_correct,
+      r.module_correct === undefined || r.module_correct === null ? "" : r.module_correct,
+      r.response_time_ms || "", r.rated_at || "",
+    ];
+    if (existingIdx[r.trial_idx] !== undefined) {
+      sheet.getRange(existingIdx[r.trial_idx], 1, 1, row.length).setValues([row]);
+    } else {
+      toAppend.push(row);
+    }
+  });
+  if (toAppend.length > 0) {
+    sheet.getRange(sheet.getLastRow() + 1, 1, toAppend.length, toAppend[0].length).setValues(toAppend);
+  }
 }

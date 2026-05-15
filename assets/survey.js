@@ -8,9 +8,16 @@
 
 // === CONFIG ============================================================
 const APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbw07f_GozLn2FrAMa_Wl8PlFmnKcmoD5pGmpuZ4-XvYZ7VYg8hCLVv9hP0fYKJZHKf0yw/exec";
-const STUDY_VERSION = "v3.1_two_stage_buttons_2026-05-15";
+const STUDY_VERSION = "v3.2_incremental_logging_2026-05-15";
 const ADVANCE_DELAY_MS = 700;
 // =======================================================================
+
+// Client-generated participant UUID (used as the join key for incremental
+// POSTs). Crypto.randomUUID is supported in all modern browsers; fallback
+// for older environments uses Math.random.
+const PARTICIPANT_ID = (typeof crypto !== "undefined" && crypto.randomUUID)
+  ? crypto.randomUUID()
+  : "u_" + Math.random().toString(36).slice(2) + Date.now().toString(36);
 
 let trials = [];
 let stimuli = [];
@@ -43,6 +50,7 @@ $("consent").addEventListener("change", checkStartReady);
 
 $("btn-start").addEventListener("click", async () => {
   participantInfo = {
+    participant_id: PARTICIPANT_ID,
     age_band: $("age_band").value,
     experience: $("experience").value,
     years_music: $("years_music").value,
@@ -64,6 +72,28 @@ $("btn-start").addEventListener("click", async () => {
   showScreen("screen-trial");
   renderTrial();
 });
+
+// Fire-and-forget POST one response (or batch) to the script — the server
+// upserts participant + appends response rows. Failures are logged to the
+// browser console but don't block the listener flow; the final Submit
+// also POSTs the full bundle as a safety net.
+function postIncremental(singleResponse) {
+  if (APPS_SCRIPT_URL.startsWith("REPLACE")) return;
+  const payload = {
+    participant: participantInfo,
+    submitted_at: new Date().toISOString(),
+    responses: [singleResponse],
+    incremental: true,
+  };
+  try {
+    fetch(APPS_SCRIPT_URL, {
+      method: "POST",
+      mode: "no-cors",
+      headers: {"Content-Type": "text/plain;charset=utf-8"},
+      body: JSON.stringify(payload),
+    }).catch(e => console.warn("Incremental POST failed:", e));
+  } catch (e) { console.warn("Incremental POST error:", e); }
+}
 
 function shuffleWithRepeatSeparation(maxAttempts = 50) {
   const MIN_GAP = 3;
@@ -185,14 +215,13 @@ function onModulePick(moduleKey, clickedBtn) {
 
 function recordAndAdvance(systemPick, modulePick) {
   const t = trials[currentTrial];
-  // System-correct: special-case placebo_modern (correct if modern/unknown)
   const systemCorrect = (t.true_system === "placebo_modern")
     ? (systemPick === "modern" || systemPick === "unknown")
     : (systemPick === t.true_system);
   const moduleCorrect = (t.true_module && modulePick)
     ? (modulePick === t.true_module)
-    : null;   // null if module pick wasn't applicable (placebo, or stage-1 was modern/unknown)
-  responses.push({
+    : null;
+  const resp = {
     trial_idx: currentTrial,
     category: t.category || "main",
     stimulus_id: t.stimulus_id,
@@ -205,7 +234,11 @@ function recordAndAdvance(systemPick, modulePick) {
     module_correct: moduleCorrect,
     response_time_ms: Math.round(performance.now() - trialStartTime),
     rated_at: new Date().toISOString(),
-  });
+  };
+  responses.push(resp);
+  // INCREMENTAL: post this single response now → server upserts participant
+  // + appends the response row. Partial completions are preserved.
+  postIncremental(resp);
   $("advance-hint").style.visibility = "hidden";
   try { $("audio-stim").pause(); } catch (e) {}
   setTimeout(() => {
