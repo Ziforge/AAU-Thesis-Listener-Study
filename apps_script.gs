@@ -36,17 +36,29 @@ function doPost(e) {
 }
 
 function doGet(e) {
-  // Wipe endpoint — only triggers with the correct one-time token in URL
-  // (protects against accidental wipe from random GETs).
   if (e && e.parameter && e.parameter.wipe === "yes-please-reset-2026-05-15") {
     const ss = getOrCreateSheet();
     ss.getSheetByName(SHEET_NAME_PARTICIPANTS).clear();
     ss.getSheetByName(SHEET_NAME_RESPONSES).clear();
-    // Re-write headers (ensureHeaderRow runs on next doPost; here we set them now)
     ss.getSheetByName(SHEET_NAME_PARTICIPANTS).appendRow(PARTICIPANT_HEADERS);
     ss.getSheetByName(SHEET_NAME_RESPONSES).appendRow(RESPONSE_HEADERS);
     return ContentService.createTextOutput("WIPED — sheet reset, headers re-written")
       .setMimeType(ContentService.MimeType.TEXT);
+  }
+  if (e && e.parameter && e.parameter.stats === "yes") {
+    const ss = getOrCreateSheet();
+    const pSheet = ss.getSheetByName(SHEET_NAME_PARTICIPANTS);
+    const rSheet = ss.getSheetByName(SHEET_NAME_RESPONSES);
+    const pCount = Math.max(0, pSheet.getLastRow() - 1);
+    const rCount = Math.max(0, rSheet.getLastRow() - 1);
+    const stats = {
+      participants: pCount,
+      total_responses: rCount,
+      avg_responses_per_participant: pCount > 0 ? +(rCount / pCount).toFixed(1) : 0,
+      generated_at: new Date().toISOString(),
+    };
+    return ContentService.createTextOutput(JSON.stringify(stats, null, 2))
+      .setMimeType(ContentService.MimeType.JSON);
   }
   return ContentService.createTextOutput("OK — listener study endpoint")
     .setMimeType(ContentService.MimeType.TEXT);
