@@ -88,7 +88,7 @@ function shuffleWithRepeatSeparation(maxAttempts = 50) {
 
 async function loadTrials() {
   try {
-    const r = await fetch("trial_list.json");
+    const r = await fetch("trial_list.json?v=20260515c");
     const data = await r.json();
     stimuli = data.stimuli;
     trials = data.trials;
