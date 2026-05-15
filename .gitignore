@@ -1,3 +1,14 @@
+# Local-only build artefacts — not deployed to the public site
+build_stimuli.py
+build_assets.sh
+render_musical_demos.py
+musical_renders/
+analysis/
+OUTCOME_PLANNING.md
+PRE_REGISTRATION_DRAFT.tex
+deploy.md
+stimuli/*.wav
+!stimuli/warmup.wav
 __pycache__/
 *.pyc
 .DS_Store
