@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<title>Vintage Modular Synth — Listener Study</title>
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+<div id="app">
+  <!-- Welcome screen -->
+  <section id="screen-welcome" class="screen active">
+    <h1>Vintage Modular Synth — Listener Study</h1>
+    <p class="subtitle">~9 minutes · headphones recommended</p>
+    <div class="card">
+      <h2>The task</h2>
+      <p>You will hear <strong>22 short audio clips</strong> (~30 seconds each, around 11 minutes total). For each clip you'll answer in two steps:</p>
+      <ul>
+        <li><strong>Step 1:</strong> Which synth family does it sound like? (Buchla, Serge, EMS/VCS3, Soundfreak — or "modern/digital" or "I don't recognise")</li>
+        <li><strong>Step 2:</strong> If you picked a family, which specific module within that family? (a list of options appears)</li>
+      </ul>
+      <p>Each tap locks in your answer and the next clip loads automatically. There are no right or wrong answers — your perception is the data. The two-step format lets us measure family-level vs module-level recognition separately. A few clips are deliberate sanity-check controls.</p>
+      <h2>Before you start</h2>
+      <ul>
+        <li><strong>Use headphones</strong> if you have them. Laptop speakers also work.</li>
+        <li>Set your volume to a comfortable level using the warm-up clip below.</li>
+        <li>If you don't recognise a particular sound, just pick "I don't recognise" — that's useful data too.</li>
+      </ul>
+      <h2>Volume warm-up</h2>
+      <audio controls src="stimuli/warmup.wav" id="warmup">Your browser does not support audio.</audio>
+    </div>
+    <div class="form-row">
+      <label for="age_band">Age band:</label>
+      <select id="age_band" required>
+        <option value="">— select —</option>
+        <option value="under_18">Under 18</option>
+        <option value="18_24">18–24</option>
+        <option value="25_34">25–34</option>
+        <option value="35_44">35–44</option>
+        <option value="45_54">45–54</option>
+        <option value="55_64">55–64</option>
+        <option value="65_plus">65 or older</option>
+        <option value="prefer_not_to_say">Prefer not to say</option>
+      </select>
+    </div>
+    <div class="form-row">
+      <label for="experience">Your modular synth / sound design experience:</label>
+      <select id="experience" required>
+        <option value="">— select —</option>
+        <option value="none">None — I just like music</option>
+        <option value="hobbyist">Hobbyist (a few years)</option>
+        <option value="intermediate">Intermediate (5+ years, regular practice)</option>
+        <option value="professional">Professional (sound designer, musician, engineer)</option>
+        <option value="researcher">Researcher / academic</option>
+      </select>
+    </div>
+    <div class="form-row">
+      <label for="years_music">Years of musical practice (any style, any instrument):</label>
+      <select id="years_music" required>
+        <option value="">— select —</option>
+        <option value="0_2">0–2 years</option>
+        <option value="3_5">3–5 years</option>
+        <option value="6_10">6–10 years</option>
+        <option value="11_20">11–20 years</option>
+        <option value="21_plus">More than 20 years</option>
+      </select>
+    </div>
+    <div class="form-row">
+      <label for="country">Country (optional, helps show geographic reach):</label>
+      <select id="country">
+        <option value="">— prefer not to say —</option>
+        <option value="DK">Denmark</option>
+        <option value="SE">Sweden</option>
+        <option value="NO">Norway</option>
+        <option value="FI">Finland</option>
+        <option value="DE">Germany</option>
+        <option value="NL">Netherlands</option>
+        <option value="UK">UK</option>
+        <option value="FR">France</option>
+        <option value="IT">Italy</option>
+        <option value="ES">Spain</option>
+        <option value="PL">Poland</option>
+        <option value="other_eu">Other EU</option>
+        <option value="US">USA</option>
+        <option value="CA">Canada</option>
+        <option value="MX">Mexico</option>
+        <option value="BR">Brazil</option>
+        <option value="JP">Japan</option>
+        <option value="KR">South Korea</option>
+        <option value="AU">Australia</option>
+        <option value="NZ">New Zealand</option>
+        <option value="other">Other</option>
+      </select>
+    </div>
+    <div class="form-row">
+      <label for="familiarity">Familiarity with vintage modular synths (Buchla, Serge, EMS, etc.):</label>
+      <select id="familiarity" required>
+        <option value="">— select —</option>
+        <option value="none">Not familiar</option>
+        <option value="some">I've heard recordings</option>
+        <option value="hands_on">I've played one or seen one in person</option>
+        <option value="own">I own one or work with one regularly</option>
+      </select>
+    </div>
+    <div class="form-row">
+      <label for="prior_attempt">Have you completed this study before?</label>
+      <select id="prior_attempt" required>
+        <option value="">— select —</option>
+        <option value="no">No, first time</option>
+        <option value="yes">Yes, I've completed this before</option>
+      </select>
+    </div>
+    <div class="form-row">
+      <label for="headphones">Listening device:</label>
+      <select id="headphones" required>
+        <option value="">— select —</option>
+        <option value="hp_studio">Studio / monitoring headphones</option>
+        <option value="hp_consumer">Consumer over-ear headphones</option>
+        <option value="hp_iem">In-ear monitors / earbuds</option>
+        <option value="speakers_studio">Studio monitors</option>
+        <option value="speakers_consumer">Computer speakers</option>
+        <option value="other">Other</option>
+      </select>
+    </div>
+    <h2>Privacy &amp; GDPR (please read)</h2>
+    <div class="consent-box">
+      <p>This is an anonymous research study conducted as part of an MSc thesis at Aalborg University, Sound and Music Computing, May 2026.</p>
+      <p><strong>What we collect:</strong></p>
+      <ul>
+        <li>Your age <em>band</em> (e.g. 25–34, not exact age)</li>
+        <li>Your modular-synth experience level (categorical)</li>
+        <li>Your years-of-musical-practice band</li>
+        <li>Your familiarity with vintage modular synths (categorical)</li>
+        <li>Your listening device type (e.g. headphones / speakers)</li>
+        <li>Country (optional)</li>
+        <li>Your responses to each trial (audio similarity / brand identification ratings)</li>
+        <li>An anonymous session ID (UUID, no link to you personally)</li>
+        <li>Optional free-text comment at the end (if you choose to leave one)</li>
+      </ul>
+      <p><strong>What we do NOT collect:</strong> your name, email, IP address, browser fingerprint, location, or any other personally identifying information. No cookies.</p>
+      <p><strong>Lawful basis:</strong> consent (Article 6(1)(a) GDPR). You provide consent by clicking the box below.</p>
+      <p><strong>Storage:</strong> Anonymous responses are stored in Google Sheets in the researcher's Google Drive. Aggregate analyses (with no individual responses identifiable) may be reported in the MSc thesis and potential academic publications. The dataset will be deleted after the thesis is submitted (May 2026 + 1 year archive).</p>
+      <p><strong>Right to withdraw:</strong> Close the tab at any time before submitting. Once submitted, responses are anonymous and cannot be linked back to you for deletion. If you have concerns, contact <span class="contact-placeholder">[your-aau-email]@student.aau.dk</span>.</p>
+    </div>
+    <div class="form-row consent-row">
+      <label class="consent-label">
+        <input type="checkbox" id="consent">
+        <span>I have read the privacy notice above and consent to participating anonymously.</span>
+      </label>
+    </div>
+    <button id="btn-start" disabled>Start study →</button>
+    <p class="footer">Anonymous. Approx 9 minutes. Close the tab at any time without submitting.</p>
+  </section>
+
+  <!-- Trial screen — single-clip brand identification -->
+  <section id="screen-trial" class="screen">
+    <div class="progress"><div id="progress-bar"></div></div>
+    <p id="progress-text" class="progress-text">Trial 1 of 22</p>
+
+    <div class="card trial-card" id="trial-brand">
+      <h2>Listen, then pick the family it most sounds like.</h2>
+      <div class="player-row single">
+        <div class="player-block">
+          <audio id="audio-stim" controls preload="auto"></audio>
+        </div>
+      </div>
+      <p class="rating-prompt">Which family of vintage synthesisers does this most sound like?</p>
+      <!-- Choice buttons. Filled at runtime by survey.js. Click locks in
+           the selection (button greys out + becomes non-clickable), then
+           auto-advances to next trial after a short delay. -->
+      <div class="choice-buttons" id="choice-buttons"></div>
+      <p class="advance-hint" id="advance-hint" style="visibility:hidden">
+        Tap your answer — it locks in immediately.
+      </p>
+    </div>
+
+  </section>
+
+  <!-- Submit screen -->
+  <section id="screen-submit" class="screen">
+    <div class="card">
+      <h1>Almost done</h1>
+      <p>Thanks for completing the trials. Submit your responses anonymously below.</p>
+      <p>Optional: leave a one-line note (your background, what you noticed, anything).</p>
+      <textarea id="comment" rows="3" placeholder="Optional comment"></textarea>
+      <button id="btn-submit">Submit my responses</button>
+      <p id="submit-status" class="submit-status"></p>
+    </div>
+  </section>
+
+  <!-- Done screen -->
+  <section id="screen-done" class="screen">
+    <div class="card">
+      <h1>Thank you 🙏</h1>
+      <p>Your responses have been recorded.</p>
+      <p>This feeds into a 2026 MSc thesis on virtual analog modelling of vintage Buchla 200 series, Serge Modular, EMS Synthi, and Soundfreak hardware at AAU Sound and Music Computing.</p>
+      <p>Feel free to share the link / QR with other modular-synth practitioners.</p>
+    </div>
+  </section>
+</div>
+
+<script src="assets/survey.js"></script>
+</body>
+</html>

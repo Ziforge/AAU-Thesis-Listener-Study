@@ -1,0 +1,445 @@
+{
+  "stimuli": [
+    {
+      "id": "914c30a8",
+      "label": "Buchla 259 oscillator",
+      "file": "buchla_259_oscillator.mp3",
+      "system": "buchla_200",
+      "module_id": "259"
+    },
+    {
+      "id": "ae548333",
+      "label": "Buchla 265 source of uncertainty",
+      "file": "buchla_265_uncertainty.mp3",
+      "system": "buchla_200",
+      "module_id": "265"
+    },
+    {
+      "id": "832983a6",
+      "label": "Buchla 277 signal delay",
+      "file": "buchla_277_delay.mp3",
+      "system": "buchla_200",
+      "module_id": "277"
+    },
+    {
+      "id": "83575e6c",
+      "label": "Buchla 281 function gen",
+      "file": "buchla_281_function_gen.mp3",
+      "system": "buchla_200",
+      "module_id": "281"
+    },
+    {
+      "id": "74380c3f",
+      "label": "Buchla 285 freq shifter",
+      "file": "buchla_285_freqshifter.mp3",
+      "system": "buchla_200",
+      "module_id": "285"
+    },
+    {
+      "id": "9e1e9027",
+      "label": "Buchla 291 filter",
+      "file": "buchla_291_filter.mp3",
+      "system": "buchla_200",
+      "module_id": "291"
+    },
+    {
+      "id": "6965ad59",
+      "label": "Buchla 292c LPG",
+      "file": "buchla_292_lpg.mp3",
+      "system": "buchla_200",
+      "module_id": "292c"
+    },
+    {
+      "id": "f434c2c2",
+      "label": "Buchla 292 vintage",
+      "file": "buchla_292_vintage.mp3",
+      "system": "buchla_200",
+      "module_id": "292v"
+    },
+    {
+      "id": "dab83226",
+      "label": "Buchla 296 spectral processor",
+      "file": "buchla_296_spectral.mp3",
+      "system": "buchla_200",
+      "module_id": "296"
+    },
+    {
+      "id": "d4aa1e9a",
+      "label": "Serge DUSG",
+      "file": "serge_dusg.mp3",
+      "system": "serge",
+      "module_id": "dusg"
+    },
+    {
+      "id": "765c9500",
+      "label": "Serge frequency shifter",
+      "file": "serge_frequency_shifter.mp3",
+      "system": "serge",
+      "module_id": "fs"
+    },
+    {
+      "id": "e3fd8747",
+      "label": "Serge NTO oscillator",
+      "file": "serge_nto.mp3",
+      "system": "serge",
+      "module_id": "nto"
+    },
+    {
+      "id": "e481ccda",
+      "label": "Serge PCO oscillator",
+      "file": "serge_pco.mp3",
+      "system": "serge",
+      "module_id": "pco"
+    },
+    {
+      "id": "e6d3d052",
+      "label": "Serge VCFQ filter",
+      "file": "serge_vcfq.mp3",
+      "system": "serge",
+      "module_id": "vcfq"
+    },
+    {
+      "id": "9f659c57",
+      "label": "Serge VCFQ ping",
+      "file": "serge_vcfq_ping.mp3",
+      "system": "serge",
+      "module_id": "vcfq"
+    },
+    {
+      "id": "ef962b96",
+      "label": "Serge wave multiplier",
+      "file": "serge_wave_multiplier.mp3",
+      "system": "serge",
+      "module_id": "wm"
+    },
+    {
+      "id": "9c25201b",
+      "label": "Soundfreak envelope shaper",
+      "file": "soundfreak_envelope.mp3",
+      "system": "soundfreak",
+      "module_id": "env"
+    },
+    {
+      "id": "e236d9c8",
+      "label": "Soundfreak filter",
+      "file": "soundfreak_filter.mp3",
+      "system": "soundfreak",
+      "module_id": "filt"
+    },
+    {
+      "id": "f92e0afc",
+      "label": "Modern Digital \u2014 FM Bell",
+      "file": "placebo_modern_fm_bell.mp3",
+      "system": "placebo_modern",
+      "module_id": ""
+    },
+    {
+      "id": "af3959ea",
+      "label": "Modern Digital \u2014 Supersaw",
+      "file": "placebo_modern_supersaw.mp3",
+      "system": "placebo_modern",
+      "module_id": ""
+    }
+  ],
+  "trials": [
+    {
+      "stimulus_id": "914c30a8",
+      "file": "buchla_259_oscillator.mp3",
+      "label": "Buchla 259 oscillator",
+      "true_system": "buchla_200",
+      "true_module": "259",
+      "category": "main"
+    },
+    {
+      "stimulus_id": "ae548333",
+      "file": "buchla_265_uncertainty.mp3",
+      "label": "Buchla 265 source of uncertainty",
+      "true_system": "buchla_200",
+      "true_module": "265",
+      "category": "main"
+    },
+    {
+      "stimulus_id": "832983a6",
+      "file": "buchla_277_delay.mp3",
+      "label": "Buchla 277 signal delay",
+      "true_system": "buchla_200",
+      "true_module": "277",
+      "category": "main"
+    },
+    {
+      "stimulus_id": "83575e6c",
+      "file": "buchla_281_function_gen.mp3",
+      "label": "Buchla 281 function gen",
+      "true_system": "buchla_200",
+      "true_module": "281",
+      "category": "main"
+    },
+    {
+      "stimulus_id": "74380c3f",
+      "file": "buchla_285_freqshifter.mp3",
+      "label": "Buchla 285 freq shifter",
+      "true_system": "buchla_200",
+      "true_module": "285",
+      "category": "main"
+    },
+    {
+      "stimulus_id": "9e1e9027",
+      "file": "buchla_291_filter.mp3",
+      "label": "Buchla 291 filter",
+      "true_system": "buchla_200",
+      "true_module": "291",
+      "category": "main"
+    },
+    {
+      "stimulus_id": "6965ad59",
+      "file": "buchla_292_lpg.mp3",
+      "label": "Buchla 292c LPG",
+      "true_system": "buchla_200",
+      "true_module": "292c",
+      "category": "main"
+    },
+    {
+      "stimulus_id": "f434c2c2",
+      "file": "buchla_292_vintage.mp3",
+      "label": "Buchla 292 vintage",
+      "true_system": "buchla_200",
+      "true_module": "292v",
+      "category": "main"
+    },
+    {
+      "stimulus_id": "dab83226",
+      "file": "buchla_296_spectral.mp3",
+      "label": "Buchla 296 spectral processor",
+      "true_system": "buchla_200",
+      "true_module": "296",
+      "category": "main"
+    },
+    {
+      "stimulus_id": "d4aa1e9a",
+      "file": "serge_dusg.mp3",
+      "label": "Serge DUSG",
+      "true_system": "serge",
+      "true_module": "dusg",
+      "category": "main"
+    },
+    {
+      "stimulus_id": "765c9500",
+      "file": "serge_frequency_shifter.mp3",
+      "label": "Serge frequency shifter",
+      "true_system": "serge",
+      "true_module": "fs",
+      "category": "main"
+    },
+    {
+      "stimulus_id": "e3fd8747",
+      "file": "serge_nto.mp3",
+      "label": "Serge NTO oscillator",
+      "true_system": "serge",
+      "true_module": "nto",
+      "category": "main"
+    },
+    {
+      "stimulus_id": "e481ccda",
+      "file": "serge_pco.mp3",
+      "label": "Serge PCO oscillator",
+      "true_system": "serge",
+      "true_module": "pco",
+      "category": "main"
+    },
+    {
+      "stimulus_id": "e6d3d052",
+      "file": "serge_vcfq.mp3",
+      "label": "Serge VCFQ filter",
+      "true_system": "serge",
+      "true_module": "vcfq",
+      "category": "main"
+    },
+    {
+      "stimulus_id": "9f659c57",
+      "file": "serge_vcfq_ping.mp3",
+      "label": "Serge VCFQ ping",
+      "true_system": "serge",
+      "true_module": "vcfq",
+      "category": "main"
+    },
+    {
+      "stimulus_id": "ef962b96",
+      "file": "serge_wave_multiplier.mp3",
+      "label": "Serge wave multiplier",
+      "true_system": "serge",
+      "true_module": "wm",
+      "category": "main"
+    },
+    {
+      "stimulus_id": "9c25201b",
+      "file": "soundfreak_envelope.mp3",
+      "label": "Soundfreak envelope shaper",
+      "true_system": "soundfreak",
+      "true_module": "env",
+      "category": "main"
+    },
+    {
+      "stimulus_id": "e236d9c8",
+      "file": "soundfreak_filter.mp3",
+      "label": "Soundfreak filter",
+      "true_system": "soundfreak",
+      "true_module": "filt",
+      "category": "main"
+    },
+    {
+      "stimulus_id": "f92e0afc",
+      "file": "placebo_modern_fm_bell.mp3",
+      "label": "Modern Digital \u2014 FM Bell",
+      "true_system": "placebo_modern",
+      "true_module": "",
+      "category": "placebo_modern"
+    },
+    {
+      "stimulus_id": "af3959ea",
+      "file": "placebo_modern_supersaw.mp3",
+      "label": "Modern Digital \u2014 Supersaw",
+      "true_system": "placebo_modern",
+      "true_module": "",
+      "category": "placebo_modern"
+    },
+    {
+      "stimulus_id": "914c30a8",
+      "file": "buchla_259_oscillator.mp3",
+      "label": "Buchla 259 oscillator (repeat)",
+      "true_system": "buchla_200",
+      "true_module": "259",
+      "category": "repeat_consistency"
+    },
+    {
+      "stimulus_id": "d4aa1e9a",
+      "file": "serge_dusg.mp3",
+      "label": "Serge DUSG (repeat)",
+      "true_system": "serge",
+      "true_module": "dusg",
+      "category": "repeat_consistency"
+    }
+  ],
+  "system_options": {
+    "buchla_200": "Buchla 200 series",
+    "serge": "Serge Modular",
+    "ems_vcs3": "EMS / VCS3 (Synthi)",
+    "soundfreak": "Soundfreak (or other obscure vintage modular)"
+  },
+  "module_options": {
+    "buchla_200": [
+      [
+        "259",
+        "259 Complex Oscillator"
+      ],
+      [
+        "265",
+        "265 Source of Uncertainty"
+      ],
+      [
+        "277",
+        "277 Signal Delay"
+      ],
+      [
+        "281",
+        "281 Quad Function Generator"
+      ],
+      [
+        "285",
+        "285 Frequency Shifter"
+      ],
+      [
+        "291",
+        "291 Filter"
+      ],
+      [
+        "292c",
+        "292c LPG (modern reissue)"
+      ],
+      [
+        "292v",
+        "292 LPG (vintage)"
+      ],
+      [
+        "296",
+        "296 Spectral Processor"
+      ],
+      [
+        "other_buchla",
+        "Other Buchla module / not sure which"
+      ]
+    ],
+    "serge": [
+      [
+        "dusg",
+        "DUSG"
+      ],
+      [
+        "fs",
+        "Frequency Shifter"
+      ],
+      [
+        "nto",
+        "NTO oscillator"
+      ],
+      [
+        "pco",
+        "PCO oscillator"
+      ],
+      [
+        "vcfq",
+        "VCFQ filter"
+      ],
+      [
+        "wm",
+        "Wave Multiplier"
+      ],
+      [
+        "other_serge",
+        "Other Serge module / not sure which"
+      ]
+    ],
+    "ems_vcs3": [
+      [
+        "vcs3_osc",
+        "VCS3 oscillator"
+      ],
+      [
+        "vcs3_filt",
+        "VCS3 trapezoid filter"
+      ],
+      [
+        "vcs3_ringmod",
+        "VCS3 ring modulator"
+      ],
+      [
+        "other_ems",
+        "Other EMS module / not sure which"
+      ]
+    ],
+    "soundfreak": [
+      [
+        "filt",
+        "Filter"
+      ],
+      [
+        "env",
+        "Envelope Shaper"
+      ],
+      [
+        "osc",
+        "Oscillator"
+      ],
+      [
+        "other_sf",
+        "Other Soundfreak module / not sure which"
+      ]
+    ]
+  },
+  "extra_options": {
+    "unknown": "I don't recognise this style",
+    "modern": "Sounds modern / digital, not vintage modular"
+  },
+  "sample_rate": 44100,
+  "duration_s": 30.0,
+  "trial_count": 22
+}
