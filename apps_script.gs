@@ -36,7 +36,18 @@ function doPost(e) {
 }
 
 function doGet(e) {
-  // Health check
+  // Wipe endpoint — only triggers with the correct one-time token in URL
+  // (protects against accidental wipe from random GETs).
+  if (e && e.parameter && e.parameter.wipe === "yes-please-reset-2026-05-15") {
+    const ss = getOrCreateSheet();
+    ss.getSheetByName(SHEET_NAME_PARTICIPANTS).clear();
+    ss.getSheetByName(SHEET_NAME_RESPONSES).clear();
+    // Re-write headers (ensureHeaderRow runs on next doPost; here we set them now)
+    ss.getSheetByName(SHEET_NAME_PARTICIPANTS).appendRow(PARTICIPANT_HEADERS);
+    ss.getSheetByName(SHEET_NAME_RESPONSES).appendRow(RESPONSE_HEADERS);
+    return ContentService.createTextOutput("WIPED — sheet reset, headers re-written")
+      .setMimeType(ContentService.MimeType.TEXT);
+  }
   return ContentService.createTextOutput("OK — listener study endpoint")
     .setMimeType(ContentService.MimeType.TEXT);
 }
