@@ -144,3 +144,91 @@ design-context familiarity to interpret correctly, and audio
 measurements alone — even with proper instrumentation — are not
 sufficient to recover the cultural-acoustic category. The
 mis-classification itself is data, not noise.
+
+---
+
+## 2026-05-16 — Vicariously-transmitted expertise (listener self-report)
+
+**Raised by**: the same listener who supplied the spectrum-analyser
+screenshot, in a follow-up — they added that their knowledge of
+Serge/Buchla concepts comes from other people (records, demos, forum
+descriptions, peer conversations), not from direct first-person
+experience with the modules.
+
+**Why this is a methodologically important data point**: it makes
+explicit a structural feature of the modular-synth community that the
+methodology pivot of the thesis implicitly relies on. Most "informed
+listeners", even highly engaged ones with professional audio tools,
+carry **vicariously-transmitted knowledge** of brand-character rather
+than first-person calibration against specific units.
+
+**The expertise hierarchy this exposes**:
+
+| Tier | Knowledge source | Approximate population |
+|---|---|---|
+| Design authority | First-person hands-on design / build experience over decades | ~15 globally per module family |
+| Owner-practitioner | Direct experience with one or a few specific units they own | Low hundreds globally per module |
+| Vicarious informed listener | Records, YouTube demos, magazine articles, forum descriptions, peer conversations | Tens of thousands globally |
+| Novice | No prior exposure | The general public |
+
+**Implications for the listener study and the methodology pivot**:
+
+1. Even a panel of modular-synth practitioners (e.g.\ recruited via
+   r/modular, Lines, Discord) is sampling primarily from the
+   "vicarious informed listener" tier, not the design-authority tier.
+2. The cultural knowledge of "what a Buchla sounds like" that such a
+   panel carries was constructed from records, demos, and performances
+   — all of which already filter through specific captured units that
+   the listener never had direct acoustic calibration on. The brand-
+   recognition reference is itself a peer-distance measurement, not
+   ground truth.
+3. This is the Stradivarius case **taken one tier further**: Fritz
+   \emph{et al.}'s soloists had real first-person exposure to Stradivari
+   instruments and still couldn't discriminate. Most modular-synth
+   listeners have less than that — they have never held the specific
+   module they are being asked to identify.
+4. The Superbooth interviews are therefore not a "weaker substitute"
+   for a hypothetical listener panel — they are evidence from a
+   structurally different (higher) tier of the expertise hierarchy
+   than any feasible listener panel could ever populate.
+
+**For the thesis discussion**: this is an unsolicited in-the-wild
+articulation, by an informed listener with audio tools, of exactly
+the epistemic structure the methodology pivot rests on. It should
+appear in the discussion chapter when defending the four-chain
+convergence argument.
+
+**Additional observation — measurement tools do not bridge the
+interpretation gap**: the same listener also volunteered that they were
+using an analysis tool (spectrum analyser + tuner + LUFS meter,
+visible in the screenshot) to investigate the audio rather than
+relying on naked-ear judgement alone. They cross-checked their
+auditory percept with visual measurement — the responsible thing to
+do — and still arrived at the wrong interpretation. The tools
+correctly reported the underlying *accuracy-side* signal (a clean
+sine at 391.97 Hz, G4, 0 cents off, −14 dB) but the
+*cultural-side* interpretation (``this is the canonical Serge VCFQ
+self-oscillation behaviour, the module doing what it is designed to
+do'') was not recoverable from the measurement alone. Without
+design-context familiarity with what high-Q Serge / Buchla filters
+sound and look like when they ring, even a correct
+spectrum-analyser reading remains ambiguous. This separates the
+two-evidence framing of \S\ref{sec:perceptual}:
+
+\begin{itemize}\itemsep0pt
+  \item The \textbf{accuracy question} (``what does the signal contain,
+    quantitatively'') is answerable by tools alone.
+  \item The \textbf{cultural question} (``what does this signal mean
+    --- is it the module behaving authentically or a digital
+    artefact?'') is not. It requires either first-person experience
+    with the canonical hardware behaviour, or expert testimony from
+    someone who has it.
+\end{itemize}
+
+The thesis's four-chain convergence is therefore not redundant: the
+metric chain (J = 1.33, peer-distance, silhouettes) answers the
+accuracy question; the expert-testimony chain (Superbooth interviews
+\cite{verbos2026superbooth, buchla2026superbooth}) answers the
+cultural question; the listener-study chain measures the limit of
+vicarious-expertise listeners attempting to bridge the two without
+design-context. All three are needed.
